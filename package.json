@@ -1,0 +1,13 @@
+{
+    "name": "cas-client"
+  , "description": "CAS Client for Node"
+  , "version": "0.0.1"
+  , "author": "Harv McQueen <hgm02a@acu.edu>"
+  , "main": "./lib/index.js"
+  , "devDependencies": {
+		"coffee-script": ">= 0.0.1"
+    }
+  , "private": true
+  , "dependencies": {
+  	}
+}
