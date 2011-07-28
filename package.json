@@ -1,13 +1,34 @@
 {
     "name": "cas-client"
-  , "description": "CAS Client for Node"
+  , "description": "Middleware CAS Client for Express"
   , "version": "0.0.1"
-  , "author": "Harv McQueen <hgm02a@acu.edu>"
+  , "keywords": ["cas", "client", "jasig"]
+  , "homepage": "https://bitbucket.org/hmcqueen/node-cas-client"
+  , "author": {
+        "name": "Harv McQueen"
+      , "email": "hgm02a@acu.edu"
+    }
   , "main": "./lib/index.js"
+  , "directories": {
+        "lib": "./lib"
+    }
+  , "repository": {
+        "type": "hg"
+        "url": "https://bitbucket.org/hmcqueen/node-cas-client"
+    }
+  , "scripts":
+      {
+        "prepublish": "coffee -b -o lib/ -c src/*.coffee"
+      }
+  , "config":
+      {
+        "cas_host": "localhost"
+      , "cas_base_url": "http://localhost:3000"
+      }
   , "devDependencies": {
 		"coffee-script": ">= 0.0.1"
     }
-  , "private": true
+  , "private": false
   , "dependencies": {
   	}
 }
