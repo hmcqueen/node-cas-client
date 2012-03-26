@@ -14,21 +14,20 @@
     }
   , "repository": {
         "type": "hg"
-        "url": "https://bitbucket.org/hmcqueen/node-cas-client"
+      , "url": "https://bitbucket.org/hmcqueen/node-cas-client"
     }
   , "scripts":
       {
         "prepublish": "coffee -b -o lib/ -c src/*.coffee"
       }
-  , "config":
-      {
+  , "config": {
         "cas_host": "localhost"
       , "cas_base_url": "http://localhost:3000"
-      }
+    }
   , "devDependencies": {
-		"coffee-script": ">= 0.0.1"
+        "coffee-script": ">= 0.0.1"
     }
   , "private": false
   , "dependencies": {
-  	}
+    }
 }
