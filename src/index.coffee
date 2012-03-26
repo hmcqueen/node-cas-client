@@ -1,8 +1,9 @@
 url = require 'url'
+http = require 'http'
 https = require 'https'
 
 class Validator
-    constructor: (@ssoHost, @serverBaseURL) ->
+    constructor: (@ssoHost, @serverBaseURL, @secure = true) ->
         
     validate: (request, ticket, callback) ->
         resolvedURL = url.resolve @serverBaseURL, request.url
@@ -10,7 +11,11 @@ class Validator
         delete parsedURL.query.ticket
         delete parsedURL.search
         service = url.format parsedURL
-        get = https.get
+        if @secure
+            client = https
+        else
+            client = http
+        get = client.get
             host: @ssoHost
             path: url.format
                       pathname: '/validate'
@@ -44,18 +49,20 @@ class Validator
                 callback null, e
             return
 
-exports.getMiddleware = (ssoHost, serverBaseURL, options) ->
-    ssoBaseURL = 'https://' + ssoHost
-    loginURL = ssoBaseURL + '/login'
-    validateURL = ssoBaseURL + '/validate'
+exports.getMiddleware = (ssoBaseURL, serverBaseURL, options = {}) ->
+    parsedSsoBaseURL = url.parse ssoBaseURL
+    secure = parsedSsoBaseURL is 'https'
     
-    validator = new Validator ssoHost, serverBaseURL
+    loginURL = ssoBaseURL + '/login'
+    
+    validator = new Validator parsedSsoBaseURL.host, serverBaseURL, secure
     
     (req, res, next) ->
-        if req.session?.authenticatedUser?
-            req.authenticatedUser = req.session.authenticatedUser
-            next()
-            return
+        if req.session?
+            if req.session.authenticatedUser?
+                req.authenticatedUser = req.session.authenticatedUser
+                next()
+                return
   
         ticket = req.param 'ticket'
         if ticket?
