@@ -3,7 +3,7 @@
   , "description": "Middleware CAS Client for Express"
   , "version": "0.0.1"
   , "keywords": ["cas", "client", "jasig"]
-  , "homepage": "https://bitbucket.org/hmcqueen/node-cas-client"
+  , "homepage": "https://bitbucket.org/hmcqueen/node-cas-client/wiki"
   , "author": {
         "name": "Harv McQueen"
       , "email": "hgm02a@acu.edu"

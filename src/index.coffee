@@ -62,8 +62,7 @@ exports.getMiddleware = (ssoHost, serverBaseURL, options) ->
             user = validator.validate req, ticket, (user, error) ->
                 if req.session?
                     req.session.authenticatedUser = user
-                else
-                    req.authenticatedUser = user
+                req.authenticatedUser = user
                 next()
                 return
         else
